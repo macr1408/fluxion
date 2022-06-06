@@ -852,7 +852,8 @@ fluxion_allocate_interface() { # Reserve interfaces
   echo -e "$CWht[$CSGrn+$CWht] "$(
     io_dynamic_output "$FLUXIONAllocatingInterfaceNotice"
   )"$CClr"
-
+  
+  airmon-ng check kill
 
   if interface_is_wireless $identifier; then
     # Unblock wireless interfaces to make them available.
