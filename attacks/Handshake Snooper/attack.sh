@@ -127,6 +127,13 @@ handshake_snooper_arbiter_daemon() {
   mv "$FLUXIONWorkspacePath/capture/recent.cap" \
     "$FLUXIONPath/attacks/Handshake Snooper/handshakes/$FluxionTargetSSIDClean-$FluxionTargetMAC.cap"
 
+  local fancyMAC=$FluxionTargetMAC | sed 's/://g'
+  if [ -e /usr/lib/hashcat-utils/cap2hccapx.bin ]
+  then
+    /usr/lib/hashcat-utils/cap2hccapx.bin "$FLUXIONPath/attacks/Handshake Snooper/handshakes/$FluxionTargetSSIDClean-$FluxionTargetMAC.cap" \
+      "$FLUXIONPath/attacks/Handshake Snooper/handshakes/$FluxionTargetSSIDClean-$fancyMAC.hccapx"
+  fi
+
   # Signal parent process the verification terminated.
   kill -s SIGABRT $1
 }
